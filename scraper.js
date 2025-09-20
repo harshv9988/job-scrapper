@@ -17,8 +17,8 @@ class JobScraper {
         // Load configuration files
         await this.loadConfiguration();
 
-        // Launch browser
-        this.browser = await puppeteer.launch({
+        // Launch browser with Render.com specific configuration
+        const launchOptions = {
             headless: 'new',
             args: [
                 '--no-sandbox',
@@ -28,9 +28,30 @@ class JobScraper {
                 '--no-first-run',
                 '--no-zygote',
                 '--single-process',
-                '--disable-gpu'
+                '--disable-gpu',
+                '--disable-web-security',
+                '--disable-features=VizDisplayCompositor'
             ]
-        });
+        };
+
+        // On Render.com, use the installed Chrome
+        if (process.env.NODE_ENV === 'production') {
+            const fs = require('fs');
+            const chromePath = '/opt/render/.cache/puppeteer/chrome-linux64/chrome';
+
+            console.log('🔧 Checking Chrome installation...');
+            console.log('🔧 Chrome path:', chromePath);
+            console.log('🔧 Chrome exists:', fs.existsSync(chromePath));
+
+            if (fs.existsSync(chromePath)) {
+                launchOptions.executablePath = chromePath;
+                console.log('✅ Using production Chrome path:', launchOptions.executablePath);
+            } else {
+                console.log('⚠️ Chrome not found at expected path, using default');
+            }
+        }
+
+        this.browser = await puppeteer.launch(launchOptions);
 
         this.page = await this.browser.newPage();
         await this.page.setUserAgent(process.env.USER_AGENT || 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
