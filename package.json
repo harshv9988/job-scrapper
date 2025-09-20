@@ -7,7 +7,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "scrape": "node scraper.js",
-    "web": "node web-server.js"
+    "web": "node web-server.js",
+    "postinstall": "npx puppeteer browsers install chrome"
   },
   "keywords": ["web-scraping", "jobs", "frontend", "puppeteer", "automation"],
   "author": "",
