@@ -1,0 +1,43 @@
+{
+  "primary_keywords": [
+    "Software Engineer - Frontend"
+  ],
+  "secondary_keywords": [
+    "frontend",
+    "front-end",
+    "react",
+    "vue",
+    "angular",
+    "javascript",
+    "typescript",
+    "html",
+    "css",
+    "sass",
+    "scss",
+    "webpack",
+    "vite",
+    "next.js",
+    "nuxt.js"
+  ],
+  "exclude_keywords": [
+    "backend",
+    "fullstack",
+    "full-stack",
+    "devops",
+    "senior backend",
+    "python",
+    "java",
+    "php",
+    "ruby",
+    "node.js backend",
+    "database",
+    "sql",
+    "mobile",
+    "ios",
+    "android",
+    "react native backend"
+  ],
+  "location_preferences": [
+    "india"
+  ]
+}
