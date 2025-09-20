@@ -6,6 +6,10 @@ const JobScrapingApp = require('./index');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+console.log(`🔧 Environment: ${process.env.NODE_ENV || 'development'}`);
+console.log(`🔧 PORT environment variable: ${process.env.PORT}`);
+console.log(`🔧 Using port: ${PORT}`);
+
 // Middleware
 app.use(express.json());
 
@@ -89,11 +93,12 @@ cron.schedule(cronSchedule, async () => {
 console.log('✅ Cron job scheduled successfully');
 
 // Start the web server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`🌐 Job Scraper Web Server running on port ${PORT}`);
     console.log(`📊 Health check: http://localhost:${PORT}/health`);
     console.log(`🚀 Manual trigger: POST http://localhost:${PORT}/trigger-scrape`);
     console.log(`📈 Status: http://localhost:${PORT}/status`);
+    console.log(`🔗 Server bound to 0.0.0.0:${PORT}`);
 });
 
 // Graceful shutdown
