@@ -99,13 +99,13 @@ class JobScraper {
         });
 
         // Wait for Microsoft's dynamic content to load
-        await this.page.waitForTimeout(3000);
+        await new Promise(resolve => setTimeout(resolve, 3000));
 
         // Scroll to load more jobs if needed
         await this.page.evaluate(() => {
             window.scrollTo(0, document.body.scrollHeight);
         });
-        await this.page.waitForTimeout(2000);
+        await new Promise(resolve => setTimeout(resolve, 2000));
 
         const jobs = await this.page.evaluate(() => {
             const jobElements = document.querySelectorAll('div[aria-label^="Job item"]');
@@ -165,13 +165,13 @@ class JobScraper {
         });
 
         // Wait for Amazon's dynamic content to load
-        await this.page.waitForTimeout(3000);
+        await new Promise(resolve => setTimeout(resolve, 3000));
 
         // Scroll to load more jobs if needed
         await this.page.evaluate(() => {
             window.scrollTo(0, document.body.scrollHeight);
         });
-        await this.page.waitForTimeout(2000);
+        await new Promise(resolve => setTimeout(resolve, 2000));
 
         const jobs = await this.page.evaluate(() => {
             const jobElements = document.querySelectorAll('a.job-link');
@@ -227,7 +227,7 @@ class JobScraper {
             timeout: 30000
         });
 
-        await this.page.waitForTimeout(2000);
+        await new Promise(resolve => setTimeout(resolve, 2000));
 
         const jobs = await this.extractJobLinks(portal);
         console.log(`📊 Found ${jobs.length} jobs on ${portal.name}`);
@@ -290,7 +290,7 @@ class JobScraper {
 
                 // Add delay between requests (longer for company sites)
                 const delay = portal.scrapingType === 'company-specific' ? 5000 : 2000;
-                await this.page.waitForTimeout(parseInt(process.env.SCRAPING_DELAY) || delay);
+                await new Promise(resolve => setTimeout(resolve, parseInt(process.env.SCRAPING_DELAY) || delay));
             }
         }
 

@@ -94,12 +94,12 @@ class JobScrapingApp {
     }
 
     startCronJob() {
-        const cronSchedule = process.env.CRON_SCHEDULE || '0 */4 * * *'; // Every 4 hours by default
+        const cronSchedule = process.env.CRON_SCHEDULE || '0 */4 * * *'; // Every 1 minute by default
 
         console.log(`⏰ Setting up cron job with schedule: ${cronSchedule}`);
         console.log('📅 Cron schedule explanation:');
-        console.log('   - 0: minute (0)');
-        console.log('   - */4: hour (every 4 hours)');
+        console.log('   - */1: minute (every 1 minute)');
+        console.log('   - *: hour (every hour)');
         console.log('   - *: day of month (every day)');
         console.log('   - *: month (every month)');
         console.log('   - *: day of week (every day of week)');

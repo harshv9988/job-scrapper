@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "scrape": "node scraper.js"
+    "scrape": "node scraper.js",
+    "web": "node web-server.js"
   },
   "keywords": ["web-scraping", "jobs", "frontend", "puppeteer", "automation"],
   "author": "",
@@ -18,7 +19,8 @@
     "csv-writer": "^1.6.0",
     "dotenv": "^16.3.1",
     "cheerio": "^1.0.0-rc.12",
-    "axios": "^1.6.2"
+    "axios": "^1.6.2",
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"

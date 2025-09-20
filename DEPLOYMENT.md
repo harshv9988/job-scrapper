@@ -1,6 +1,9 @@
 # 🚀 Deploying Frontend Job Scraper to Render.com
 
-This guide will walk you through deploying your job scraper as a cron job on Render.com.
+This guide covers two deployment methods for your job scraper on Render.com:
+
+1. **Web Service with Built-in Cron** (Recommended) - Runs as a web service with internal cron scheduling
+2. **Dedicated Cron Job Service** - Uses Render's cron job service
 
 ## 📋 Prerequisites
 
@@ -8,7 +11,53 @@ This guide will walk you through deploying your job scraper as a cron job on Ren
 2. **Render.com Account**: Sign up at [render.com](https://render.com)
 3. **Gmail Account**: For sending email reports (with App Password enabled)
 
-## 🔧 Step-by-Step Deployment
+## 🌐 Method 1: Web Service with Built-in Cron (Recommended)
+
+This approach runs your scraper as a web service that includes built-in cron scheduling. Benefits:
+
+- ✅ More control over scheduling
+- ✅ Web endpoints for monitoring and manual triggers
+- ✅ Better error handling and logging
+- ✅ Can run continuously
+
+### Step-by-Step Deployment
+
+1. **Push your code to GitHub** (same as before)
+2. **Sign up at [render.com](https://render.com)**
+3. **Create a new Web Service** (not Cron Job)
+4. **Configure the service**:
+   ```
+   Name: frontend-job-scraper-web
+   Environment: Node
+   Plan: Free
+   Build Command: npm install
+   Start Command: npm run web
+   ```
+5. **Add Environment Variables** (same as before)
+6. **Deploy!**
+
+### Web Endpoints Available
+
+Once deployed, your scraper will have these endpoints:
+
+- `GET /` - Main status page
+- `GET /health` - Health check
+- `GET /status` - Detailed status
+- `POST /trigger-scrape` - Manually trigger scraping
+
+### Benefits of Web Service Approach
+
+- **Always running**: Service stays alive and runs cron jobs internally
+- **Manual triggers**: You can trigger scraping via API calls
+- **Better monitoring**: Web endpoints for health checks
+- **More reliable**: Less dependent on Render's cron service
+- **Easier debugging**: Better logging and error handling
+
+## ⏰ Method 2: Dedicated Cron Job Service
+
+This is the traditional approach using Render's cron job service.
+
+## 🔧 Step-by-Step Deployment (Cron Job Method)
 
 ### 1. Prepare Your GitHub Repository
 
